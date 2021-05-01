@@ -11,16 +11,12 @@ type ListNode struct {
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var (
-		dummy = new(ListNode)
-		curr  = dummy
-
-		carry int
+		curr   = new(ListNode) // 当前节点, 第一次运行的时候是头节点
+		result = curr          // 结果
+		carry  int             // 是否进位
 	)
 
 	for l1 != nil || l2 != nil || carry > 0 {
-		curr.Next = new(ListNode)
-
-		curr = curr.Next
 		if l1 != nil {
 			carry += l1.Val
 			l1 = l1.Next
@@ -31,11 +27,18 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			l2 = l2.Next
 		}
 
+		// 下一次操作只有有意义再进行
 		curr.Val = carry % 10
-		carry /= 10
+		if l1 != nil || l2 != nil || carry >= 10 {
+			curr.Next = new(ListNode)
+		}
+
+		// 准备下一次循环
+		carry = carry / 10
+		curr = curr.Next
 	}
 
-	return dummy.Next
+	return result
 }
 
 func main() {
