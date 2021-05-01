@@ -11,54 +11,29 @@ func addTwoNumbers(l1, l2 *ListNode) *ListNode {
 		return nil
 	}
 
-	l1Val, l2Val := 0, 0
+	node := new(ListNode) // 当前节点
+	result := node // reslut
+	carry := 0 // 进位
 
-	if l1 != nil {
-		l1Val = l1.Val
-		l1 = l1.Next
-	}
-
-	if l2 != nil {
-		l2Val = l2.Val
-		l2 = l2.Next
-	}
-
-	val := (l1Val + l2Val) % 10
-	item := (l1Val + l2Val) / 10
-
-	res := ListNode{Val: val, Next: nil}
-	head := &res
-	for {
-		if l1 == nil && l2 == nil {
-			if item == 0 {
-				break
-			} else {
-				node := ListNode{Val: item, Next: nil}
-				head.Next = &node
-				break
-			}
-
-		}
-
-		l1Val, l2Val = 0, 0
-
-		if l1 != nil {
-			l1Val = l1.Val
+	for l1 != nil || l2!=nil || carry >0 {
+		if l1!= nil {
+			carry += l1.Val
 			l1 = l1.Next
 		}
 
 		if l2 != nil {
-			l2Val = l2.Val
+			carry += l2.Val
 			l2 = l2.Next
 		}
 
-		val := (l1Val + l2Val + item) % 10
-		item = (l1Val + l2Val + item) / 10
+		node.Val=carry%10
+		carry = carry/10
 
-		node := ListNode{Val: val, Next: nil}
-		head.Next = &node
-		head = head.Next
+		if l1 != nil || l2 != nil || carry > 0 {
+			node.Next = new(ListNode)
+		}
+
+		node = node.Next
 	}
-
-	return &res
+	return result
 }

@@ -10,11 +10,7 @@ func lengthOfLongestSubstring(s string) int {
 		return 0
 	}
 
-	if len(s) == 1 {
-		return 1
-	}
-
-	max := 0
+	max := ""
 	str := ""
 	for _, item := range s{
 		loc := strings.Index(str, string(item))  // 查看字串中这个元素的位置
@@ -24,12 +20,12 @@ func lengthOfLongestSubstring(s string) int {
 			str = str + string(item)
 		}
 
-		if len(str) > max {
-			max = len(str)
+		if len(str) > len(max) {
+			max = str
 		}
 	}
 
-	return max
+	return len(max)
 }
 
 func main()  {
