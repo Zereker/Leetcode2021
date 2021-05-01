@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// 思路：记录最长字串，每一次判断后面的元素是否在前面字串中，如果在则将字串截断，否则加入字串。当某一个字串大于之前的字串时，发生字串替换，最后计算最长字串长度
 func lengthOfLongestSubstring(s string) int {
 	if len(s) == 0 {
 		return 0
