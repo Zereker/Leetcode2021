@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// 直接循环两数组下标，找到对应位置的中位数
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	if len(nums1) == 0 && len(nums2) == 0 {
 		return 0
