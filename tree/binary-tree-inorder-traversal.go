@@ -1,6 +1,8 @@
 package main
 
-import "errors"
+import (
+	"errors"
+)
 
 func Traversal(root *TreeNode, data *[]int) {
 	if root == nil {
@@ -21,14 +23,14 @@ func inorderTraversal2(root *TreeNode) []int {
 }
 
 var (
-	ErrEmpty = errors.New("stack is empty")
+	ErrEmptyStack = errors.New("stack is empty")
 )
 
 type Stack struct {
 	data []interface{}
 }
 
-func New() *Stack {
+func NewStack() *Stack {
 	data := make([]interface{}, 0)
 
 	return &Stack{data: data}
@@ -44,7 +46,7 @@ func (s *Stack) Push(x interface{}) {
 
 func (s *Stack) Pop() (interface{}, error) {
 	if s.IsEmpty() {
-		return nil, ErrEmpty
+		return nil, ErrEmptyStack
 	}
 
 	index := len(s.data) - 1
@@ -57,7 +59,7 @@ func (s *Stack) Pop() (interface{}, error) {
 
 func (s *Stack) Top() (interface{}, error) {
 	if s.IsEmpty() {
-		return nil, ErrEmpty
+		return nil, ErrEmptyStack
 	}
 
 	index := len(s.data) - 1
@@ -70,7 +72,7 @@ func (s *Stack) Top() (interface{}, error) {
 func inorderTraversal(root *TreeNode) []int {
 	result := make([]int, 0)
 
-	stack := New()
+	stack := NewStack()
 
 	cur := root
 	for cur != nil || !stack.IsEmpty() {
