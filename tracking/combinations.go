@@ -3,10 +3,6 @@ package main
 import "fmt"
 
 func backtracking(n int, start int, k int, path *[]int, result *[][]int) {
-	if (len(*path) + (n - start)) < k-1 {
-		return
-	}
-
 	if len(*path) == k {
 		tmp := make([]int, len(*path))
 		copy(tmp, *path)
@@ -15,7 +11,7 @@ func backtracking(n int, start int, k int, path *[]int, result *[][]int) {
 		return
 	}
 
-	for i := start; i <= n; i++ {
+	for i := start; i <= n-(k-len(*path))+1; i++ {
 		*path = append(*path, i)
 
 		backtracking(n, i+1, k, path, result)
