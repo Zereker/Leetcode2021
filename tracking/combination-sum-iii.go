@@ -10,6 +10,10 @@ func combinationSum3(k int, n int) [][]int {
 	// 回溯
 	var backtracking func(target, sum int, index, k int)
 	backtracking = func(target, sum int, index, k int) {
+		if sum > target { // 剪枝操作
+			return
+		}
+
 		if len(path) == k {
 			if target == sum {
 				result = append(result, append([]int{}, path...))
@@ -18,7 +22,7 @@ func combinationSum3(k int, n int) [][]int {
 			return
 		}
 
-		for i := index; i <= 9; i++ {
+		for i := index; i <= 9-(k-len(path))+1; i++ {
 			sum += i
 			path = append(path, i)
 
